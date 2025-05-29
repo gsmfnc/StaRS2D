@@ -1,29 +1,17 @@
 ---
-title: 'Gala: A Python package for galactic dynamics'
+title: 'StaRS 2D: a simple Starship Reentry educational Simulator'
 tags:
-  - Python
-  - astronomy
-  - dynamics
-  - galactic dynamics
-  - milky way
+  - Processing
+  - Aerospace
 authors:
-  - name: Adrian M. Price-Whelan
-    orcid: 0000-0003-0872-7098
-    affiliation: "1, 2" # (Multiple affiliations must be quoted)
-  - name: Author Without ORCID
-    affiliation: 2
+  - name: Francesco Gismondi
+    orcid: 0000-0002-3506-4077
+    affiliation: "1" # (Multiple affiliations must be quoted)
 affiliations:
- - name: Lyman Spitzer, Jr. Fellow, Princeton University
+ - name: None
    index: 1
- - name: Institution 2
-   index: 2
-date: 13 August 2017
+date: 29 May 2025
 bibliography: paper.bib
-
-# Optional fields if submitting to a AAS journal too, see this blog post:
-# https://blog.joss.theoj.org/2018/12/a-new-collaboration-with-aas-publishing
-aas-doi: 10.3847/xxxxx <- update this with the DOI from AAS once you know it.
-aas-journal: Astrophysical Journal <- The name of the AAS journal.
 ---
 
 # Summary
