@@ -2,7 +2,8 @@
 title: 'StaRS 2D: a simple Starship Reentry educational Simulator'
 tags:
   - Processing
-  - Aerospace
+  - Space
+  - Control engineering
 authors:
   - name: Francesco Gismondi
     orcid: 0000-0002-3506-4077
