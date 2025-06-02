@@ -1,6 +1,8 @@
 Environment env;
 Command cmd;
 
+float phase = 1;
+
 void setup() {
     size(1200, 600);
     
@@ -9,27 +11,31 @@ void setup() {
 }
 
 void draw() {
-    env.initialize(); // must return starship infos
+    env.initialize();
 
     // -------------------------------------------------------------------------
     // ------------------------- Controller design -----------------------------
     // -------------------------------------------------------------------------
 
     // First phase: fixed thrust, towards the destination
-    cmd.setThrustCommand(0.5);
-    cmd.setThrustAngleCommand(0.1 * (PI/6 - env.getStarshipAngle()));
+    if (phase == 1) {
+        cmd.setThrustCommand(0.5);
+        cmd.setThrustAngleCommand(0.01 * (PI/6 - env.getStarshipAngle()));
+    }
 
     // Second phase: getting closer... reduce angle to reduce x-axis velocity
-    if (abs(env.getStarshipXPosition() - env.getDestinationX()) < 30)
-        cmd.setThrustAngleCommand(0.1 * (PI/30 - env.getStarshipAngle()));
-
-    // Third phase: practically above the destination so null starship angle and
-    // reduce thrust to reduce altitude
-    if (abs(env.getStarshipXPosition() - env.getDestinationX()) < 1) {
-        cmd.setThrustAngleCommand(-env.getStarshipAngle());
-        cmd.setThrustCommand(0.1 * (env.getDestinationY() -
+    // and start reducing altitude
+    if (abs(env.getStarshipXPosition() - env.getDestinationX()) < 100 &&
+            phase == 1) {
+        phase = 2;
+    }
+    if (phase == 2) {
+        cmd.setThrustAngleCommand(0.01 * (min(PI/16,
+            env.getStarshipXPosition() * PI/180) - env.getStarshipAngle()));
+        cmd.setThrustCommand(0.75 * (env.getDestinationY() -
             env.getStarshipYPosition()));
     }
+
     // -------------------------------------------------------------------------
     // -------------------------------------------------------------------------
     // -------------------------------------------------------------------------

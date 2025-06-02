@@ -11,11 +11,11 @@ class Position {
         translate(this.x, this.y);
     };
 
-    void addX(float x_plus) {
-        this.x = this.x + x_plus;
+    void addX(float xPlus) {
+        this.x = this.x + xPlus;
     }
-    void addY(float y_plus) {
-        this.y = this.y + y_plus;
+    void addY(float yPlus) {
+        this.y = this.y + yPlus;
     }
 
     // Getters
@@ -34,8 +34,8 @@ class Angle {
         this.theta = theta;
     }
 
-    void addTheta(float theta_plus) {
-        this.theta = this.theta + theta_plus;
+    void addTheta(float thetaPlus) {
+        this.theta = this.theta + thetaPlus;
     }
 
     void rotateAngle() {
@@ -52,8 +52,8 @@ class Actuators {
     float thrust;
     float thrustAngle;
 
-    float maxThrust = 2;
-    float maxThrustAngle = PI/2;
+    float maxThrust = 2.0;
+    float maxThrustAngle = PI/6;
 
     Actuators(float thrust, float thrustAngle) {
         this.thrust = thrust;
@@ -104,6 +104,6 @@ class Command {
         return this.thrustCommand;
     }
     float getThrustAngleCommand() {
-        return this.thrustAngleCommand;
+        return this.thrustAngleCommand * 360 / PI;
     }
 }
