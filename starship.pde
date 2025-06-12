@@ -56,7 +56,7 @@ class Starship {
         this.a.addTheta(this.omega * this.Ts * this.Ts / 2);
         */
         if (hasCollided == 0 && missionSuccess == 0) {
-            this.omega = sin(this.act.getThrustAngle()) *
+            this.omega = - sin(this.act.getThrustAngle()) *
                 this.act.getThrust() * this.ly / 2 * this.inertia;
             this.a.addTheta(this.omega);
         }

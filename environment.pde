@@ -14,6 +14,8 @@ class Environment {
 
     float timeToComplete;
 
+    int level = 1;
+
     Environment() {
         Position p = new Position(1100.0, 50.0);
         Angle a = new Angle(0);
@@ -108,18 +110,15 @@ class Environment {
     void drawStarship() {
         pushMatrix();
 
-        this.starship.computeNewPosition();
+        //this.starship.computeNewPosition();
         this.starship.computeNewAngle();
 
         this.starship.getPosition().translatePosition();
         this.starship.getAngle().rotateAngle();
 
-        // starship
-        fill(this.starship.getGreyVal(), this.starship.getGreyVal(),
-            this.starship.getGreyVal());
         translate(- this.starship.getLx() / 2, - this.starship.getLy() / 2);
-        rect(0, 0, this.starship.getLx(), this.starship.getLy());
 
+        pushMatrix();
         // thrust animation
         translate(this.starship.getLx() / 2, this.starship.getLy());
         fill(#FF0000);
@@ -135,6 +134,12 @@ class Environment {
             -this.starship.getLx() / 3, 0,
             0, this.starship.getActuators().getThrust() /
                 this.starship.getActuators().maxThrust * 20);
+        popMatrix();
+                
+        // starship
+        fill(this.starship.getGreyVal(), this.starship.getGreyVal(),
+            this.starship.getGreyVal());
+        rect(0, 0, this.starship.getLx(), this.starship.getLy());
 
         popMatrix();
     }
@@ -153,19 +158,19 @@ class Environment {
         text(String.valueOf(nf(this.getStarshipAngle() * 180 / PI, 0, 2)),
             80, 40);
 
-        text("Vx [pix/fr]: ", 200, 0);
-        text(String.valueOf(nf(-this.starship.getVx(), 0, 2)), 300, 0);
-        text("Vy [pix/fr]: ", 200, 20);
-        text(String.valueOf(nf(-this.starship.getVy(), 0, 2)), 300, 20);
-        text("ω [deg/fr]: ", 200, 40);
-        text(String.valueOf(nf(this.starship.getOmega() * 180 / PI, 0, 2)),
-            300, 40);
+        text("Vx [pix/sec]: ", 200, 0);
+        text(String.valueOf(nf(-this.starship.getVx() * 100, 0, 2)), 310, 0);
+        text("Vy [pix/sec]: ", 200, 20);
+        text(String.valueOf(nf(-this.starship.getVy() * 100, 0, 2)), 310, 20);
+        text("ω [deg/sec]: ", 200, 40);
+        text(String.valueOf(nf(-this.starship.getOmega() * 180 / PI * 100,
+            0, 2)), 310, 40);
 
         text("Thrust [%]:", 400, 0);
         text(String.valueOf(nf(this.starship.getActuators().getThrust() /
             this.starship.getActuators().maxThrust, 0, 2)), 575, 0);
         text("Thrust angle [deg]:", 400, 20);
-        text(String.valueOf(nf(this.starship.getActuators().getThrustAngle() *
+        text(String.valueOf(nf(-this.starship.getActuators().getThrustAngle() *
             180 / PI, 0, 2)), 575, 20);
         text("Seconds elapsed:", 400, 40);
         text(String.valueOf(this.getElapsedTime()), 575, 40);
@@ -251,6 +256,11 @@ class Environment {
     }
     float getElapsedTime() {
         return float(millis() / 100) / 10;
+    }
+
+    // Setters
+    void setLevel(int lvl) {
+        this.level = lvl;
     }
 
     void computeBorderPoints() {

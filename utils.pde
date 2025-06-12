@@ -104,6 +104,6 @@ class Command {
         return this.thrustCommand;
     }
     float getThrustAngleCommand() {
-        return this.thrustAngleCommand * 360 / PI;
+        return this.thrustAngleCommand;
     }
 }
