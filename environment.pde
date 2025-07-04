@@ -15,6 +15,7 @@ class Environment {
     float timeToComplete;
 
     int level = 1;
+    int simplified = 0;
 
     Environment() {
         Position p = new Position(1100.0, 50.0);
@@ -110,8 +111,8 @@ class Environment {
     void drawStarship() {
         pushMatrix();
 
-        //this.starship.computeNewPosition();
-        this.starship.computeNewAngle();
+        this.starship.computeNewPosition(this.simplified);
+        this.starship.computeNewAngle(this.simplified);
 
         this.starship.getPosition().translatePosition();
         this.starship.getAngle().rotateAngle();
@@ -155,25 +156,30 @@ class Environment {
         text("y [pix]: ", 0, 20); 
         text(String.valueOf(nf(this.getStarshipYPosition(), 0, 2)), 80, 20);
         text("θ [deg]: ", 0, 40); 
-        text(String.valueOf(nf(this.getStarshipAngle() * 180 / PI, 0, 2)),
+        text(String.valueOf(nf(this.getStarshipAngle() * 180 / PI, 0, 5)),
             80, 40);
 
         text("Vx [pix/sec]: ", 200, 0);
-        text(String.valueOf(nf(-this.starship.getVx() * 100, 0, 2)), 310, 0);
+        text(String.valueOf(nf(-this.starship.getVx(), 0, 2)),
+            310, 0);
         text("Vy [pix/sec]: ", 200, 20);
-        text(String.valueOf(nf(-this.starship.getVy() * 100, 0, 2)), 310, 20);
+        text(String.valueOf(nf(-this.starship.getVy(), 0, 2)),
+            310, 20);
         text("ω [deg/sec]: ", 200, 40);
-        text(String.valueOf(nf(-this.starship.getOmega() * 180 / PI * 100,
-            0, 2)), 310, 40);
+        text(String.valueOf(nf(-this.starship.getOmega() * 180 / PI,
+            0, 5)), 310, 40);
 
         text("Thrust [%]:", 400, 0);
         text(String.valueOf(nf(this.starship.getActuators().getThrust() /
-            this.starship.getActuators().maxThrust, 0, 2)), 575, 0);
+            this.starship.getActuators().maxThrust, 0, 5)), 575, 0);
         text("Thrust angle [deg]:", 400, 20);
         text(String.valueOf(nf(-this.starship.getActuators().getThrustAngle() *
-            180 / PI, 0, 2)), 575, 20);
+            180 / PI, 0, 5)), 575, 20);
         text("Seconds elapsed:", 400, 40);
-        text(String.valueOf(this.getElapsedTime()), 575, 40);
+        if (this.starship.missionSuccess == 0)
+            text(String.valueOf(this.getElapsedTime()), 575, 40);
+        else
+            text(String.valueOf(this.timeToComplete), 575, 40);
 
         popMatrix();
     }
@@ -181,8 +187,9 @@ class Environment {
     void checkMissionSuccess() {
         if (this.starship.hasCollided == 1)
             return;
-        if (abs(this.getStarshipXPosition()) < 1 &&
-                abs(this.getStarshipYPosition()) < 1) {
+        if (abs(this.getStarshipXPosition()) <= 1 &&
+                abs(this.getStarshipYPosition()) <= 1 &&
+                abs(this.getStarshipAngle() * 180/PI) <= 0.5) {
             if (abs(this.starship.getVy()) < 0.1 &&
                     abs(this.starship.getVx()) < 0.1) {
                 if (this.starship.missionSuccess == 0)
@@ -192,15 +199,11 @@ class Environment {
                 fill(#00FF00);
                 text("Success!", 500, 200);
                 textSize(30);
-                text("Time: ", 490, 250);
-                text(String.valueOf(this.timeToComplete), 570, 250);
-                text(" seconds", 620, 250);
+                text("Time [sec]: ", 490, 250);
+                text(String.valueOf(this.timeToComplete), 650, 250);
             } else {
-                textSize(40);
-                fill(#0000FF);
-                text("So close...", 500, 200);
-                text("Starship's velocity was too high while landing!",
-                    200, 250);
+                this.starship.hasCollided = 1;
+                this.starship.highSpeedFail = 1;
             }
         }
     }
@@ -229,6 +232,13 @@ class Environment {
                 text("Collision with the tower!", 400, 100);
             }
         }
+        if (this.starship.highSpeedFail == 1) {
+            textSize(40);
+            fill(#0000FF);
+            text("So close...", 500, 200);
+            text("Starship's velocity was too high while landing!",
+                200, 250);
+        }
     }
 
     void updateStarship(Command cmd) {
@@ -242,11 +252,20 @@ class Environment {
     float getStarshipXPosition() {
         return this.starship.getPosition().getX() - this.p_des.getX();
     }
+    float getStarshipVx() {
+        return -this.starship.getVx();
+    }
     float getStarshipYPosition() {
         return - this.starship.getPosition().getY() + this.p_des.getY();
     }
+    float getStarshipVy() {
+        return -this.starship.getVy();
+    }
     float getStarshipAngle() {
         return -this.starship.getAngle().getTheta();
+    }
+    float getStarshipOmega() {
+        return -this.starship.getOmega();
     }
     float getDestinationX() {
         return 0.0;
