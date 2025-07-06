@@ -2,9 +2,36 @@
 
 ![StaRS 2D](imgs/animation.gif)
 
-This is a very simple simulator to re-create the Starship's re-entry task.
-You can design your own controller by measuring Starship's attitude and
-determining its thrust vectoring control.
+<center>
+StaRS 2D is a very simple simulator to re-create the Starship's re-entry task.
+</center>
+
+You can interact with the simulator by measuring the attitude of the Starship
+and by giving thrust vectoring control inputs.
+In other words, you can design your own controller to complete the mission of
+bringing the Starship back to the ground tower.
+
+## Why?
+
+As a control engineer, many times I have been asked (by friends, family, ...) to
+explain what control engineering is.
+Most of the times I would only get confused faces so I started answering with
+a simple: "Well, it's robotics".
+Then I started working in the aerospace field and people started wondering:
+"But... didn't you study robotics??". Darn it!
+
+I don't really expect my friends/family to learn what control engineering is by
+using this simulator.
+However, I do believe future generations should be quite aware of this
+field as it is becoming more and more important in modern
+engineering applications.
+Maybe this simulator could be a simple way to introduce young people to the
+field by providing a simple but cool control engineering application.
+
+## Pre-requisites
+
+## Controller design
+
 You should only modify the code in <em>stars2d.pde</em> by defining useful
 variables at the beginning of the file and/or adding control inputs in the
 "Controller design" area.
@@ -79,7 +106,8 @@ the torque equation is implemented as:
 Hence, it is possible to determine the accelerations by multiplying the forces
 by the inverse of the Starship's mass $m$ (that is equal to $1$) and the
 torque by the inverse of the inertia $I$ (that is equal to $10$).
-Then, simple integration of these equations produces the motion dynamics of the
-Starship.
+Then, simple integration of these acceleration equations with a sampling time of
+$T_s=0.1s$ produces the motion
+dynamics of the Starship.
 
 quick explanation of simplified version's equations
