@@ -59,6 +59,11 @@ class Actuators {
         this.thrust = thrust;
         this.thrustAngle = thrustAngle;
     }
+    Actuators(float thrust, float thrustAngle, float maxThrustMul) {
+        this.thrust = thrust;
+        this.thrustAngle = thrustAngle;
+        this.maxThrust = this.maxThrust * maxThrustMul;
+    }
 
     // Getters and setters
     void setThrust(float thrust) {

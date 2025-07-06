@@ -13,7 +13,7 @@ class Starship {
     float greyVal = 119;
     float gravityVel = 1.0;
     float gravityAcc = 9.81;
-    float inertia = 0.1;
+    float inertiaInv = 0.1;
     float Ts = 0.1;
 
     float vx;
@@ -41,10 +41,10 @@ class Starship {
         }
         else if (hasCollided == 0 && missionSuccess == 0 && simplified == 0) {
             this.vx = this.vx + sin(this.getAngle().getTheta()) *
-                this.act.getThrust() * (this.gravityAcc) * this.Ts;
+                this.act.getThrust() * this.Ts;
             this.vy = this.vy + (this.gravityAcc -
-                cos(this.getAngle().getTheta()) * this.act.getThrust() *
-                (this.gravityAcc)) * this.Ts;
+                cos(this.getAngle().getTheta()) * this.act.getThrust()) *
+                this.Ts;
             this.p.addX(this.vx * this.Ts);
             this.p.addY(this.vy * this.Ts);
         }
@@ -53,12 +53,12 @@ class Starship {
     void computeNewAngle(int simplified) {
         if (hasCollided == 0 && missionSuccess == 0 && simplified == 1) {
             this.omega = - sin(this.act.getThrustAngle()) *
-                this.act.getThrust() * this.ly / 2 * this.inertia;
+                this.act.getThrust() * this.ly / 2 * this.inertiaInv;
             this.a.addTheta(this.omega);
         }
         else if (hasCollided == 0 && missionSuccess == 0 && simplified == 0) {
             this.omega = this.omega - sin(this.act.getThrustAngle()) *
-                this.act.getThrust() * this.ly / 2 * this.inertia * this.Ts;
+                this.act.getThrust() * this.ly / 2 * this.inertiaInv * this.Ts;
             this.a.addTheta(this.omega * this.Ts);
         }
     }

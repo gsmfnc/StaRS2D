@@ -20,7 +20,12 @@ class Environment {
     Environment() {
         Position p = new Position(1100.0, 50.0);
         Angle a = new Angle(0);
-        Actuators act = new Actuators(0.0, 0.0);
+        Actuators act;
+        if (this.simplified == 1)
+            act = new Actuators(0.0, 0.0);
+        else
+            act = new Actuators(0.0, 0.0, 9.81);
+
         starship = new Starship(p, a, act);
 
         p_des = new Position(35.0, 440.0);
