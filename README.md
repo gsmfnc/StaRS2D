@@ -2,9 +2,9 @@
 
 ![StaRS 2D](imgs/animation.gif)
 
-<center>
+<div align="center">
 StaRS 2D is a very simple simulator to re-create the Starship's re-entry task.
-</center>
+</div>
 
 You can interact with the simulator by measuring the attitude of the Starship
 and by giving thrust vectoring control inputs.
