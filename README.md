@@ -62,17 +62,21 @@ $\theta$ in [-0.5,0.5] degrees.
 
 The Starship's dynamics are implemented in a very simple way.
 It is assumed that the center of mass and the center of gravity coincide.
-Therefore, letting T be the thrust command, the acceleration equations are given
-by:
-$$
+Therefore, letting <em>T</em> be the thrust command and <em>m</em> be the
+mass of the Starship, the forces equations are given by:
+
+```math
 a_x = mT\sin(\theta)
 a_y = m(T\cos(\theta)-g)
-$$
-Letting L be the length of the Starship and I be its inertia, the angular
-acceleration equation is given by:
-$$
-\dot\omega=\frac{TLI}{2}\sin(\theta)
-$$
+```
+
+Letting <em>L</em> be the length of the Starship and <em>I</em> be its inertia,
+the torque equation is given by:
+
+```math
+\tau=\frac{TLI}{2}\sin(\theta)
+```
+
 By simply integrating these equations, the overall dynamics equations are
 obtained.
 
