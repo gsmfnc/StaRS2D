@@ -24,8 +24,8 @@ void draw() {
         thrustAngleDes = max(-PI/180, min(PI/180,
             1.0 * (3.0 - env.getStarshipVx()) * PI/180));
         cmd.setThrustAngleCommand(
-            0.1 * (env.getStarshipAngle() - thrustAngleDes) +
-            0.1 * env.getStarshipOmega());
+            1.0 * (env.getStarshipAngle() - thrustAngleDes) +
+            1.3 * env.getStarshipOmega());
     }
 
     if (abs(env.getStarshipXPosition() - env.getDestinationX()) < 200 &&
@@ -38,8 +38,8 @@ void draw() {
             env.getStarshipVx()) * PI/180));
 
         cmd.setThrustAngleCommand(
-            0.1 * (env.getStarshipAngle() - thrustAngleDes) +
-            0.1 * env.getStarshipOmega());
+            1.0 * (env.getStarshipAngle() - thrustAngleDes) +
+            1.3 * env.getStarshipOmega());
         cmd.setThrustCommand(max(0.5, min(0.55,
             0.5 - env.getStarshipYPosition()) - env.getStarshipVy()));
     }

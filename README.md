@@ -20,7 +20,7 @@ explain what control engineering is.
 Most of the times I would only get confused faces so I started answering with
 a simple: "Well, it's robotics".
 Then I started working in the aerospace field and people started wondering:
-"But... didn't you study robotics??"... Darn it!
+"But... didn't you study robotics??"... Darn it! :)
 
 I don't really expect my friends/family to learn what control engineering is by
 using this simulator.
@@ -28,7 +28,7 @@ However, I do believe future generations should be quite aware of this
 field as it is becoming more and more important in modern
 engineering applications.
 This simulator could be a simple way to introduce young people to the
-field by providing a simple but cool control engineering application.
+field by providing a simplified but cool control engineering application.
 
 ## Pre-requisites
 
@@ -41,8 +41,9 @@ systems and scalar projection);
 a function and know the "if" statement).
 1.  You have basics of control engineering (at least PID controllers).
 
-At the moment a course to explain basic control engineering techniques is in the
-making.
+At the moment a course to explain basic control engineering techniques using
+this simulator is in the making.
+The course will be written in order to have less pre-requisites.
 
 ## Installation
 
@@ -57,7 +58,7 @@ github repository and open
 <em>stars2d.pde</em> with Processing (File -> Open... and select such a
 file wherever you cloned the repository).
 
-## Controller design
+## Tools to design your controller
 
 As soon as you open StaRS 2D on Processing, you will see something like this:
 
@@ -69,31 +70,25 @@ variables at the beginning of the file and/or add thrust vectoring control
 inputs in the "Controller design" area.
 
 The position and the attitude of the Starship is expressed with respect to a
-coordinate system that has its origin on the "landing point" of the ground
+coordinate system that has its origin in the "landing point" of the ground
 tower.
 A graphical description of such quantities is shown in the following figure.
 
 ![Position and attitude.](imgs/position_attitude.png)
 
 To give thrust vectoring inputs, the simulator provides the following functions:
-1.  <em>cmd.setThrustCommand()</em>: to determine the thrust;
-1.  <em>cmd.setThrustAngleCommand()</em>: to determine the angle of thrust.
 
-The thrust command is a value between 0 and 1.
-If you provide a negative value, 0 will be considered; if you provide a number
-greater than 1, then 1 will be considered.
-When the angle $\theta$ of Starship equals 0, a thrust command of 0.5
-perfectly compensates gravity.
-
-The thrust angle is limited to the interval [-30,30] degrees.
-Such a command must be given in radians.
+| Function | Description |
+| :---------------- | :-------------------- |
+| cmd.setThrustCommand(val) | Determines the thrust; 'val' must be between 0 and 1: negative values will be forced to 0, whereas positive values greater than 1 will be forced to 1. When the angle $\theta$ of Starship equals 0, a thrust command of 0.5 perfectly compensates gravity.|
+| cmd.setThrustAngleCommand(val) | Determines the angle of thrust; the thrust angle is limited to [-30,30] degrees, thus values outside this interval will be forced to either -30 (if val$<-30$) or 30 degrees (if val$>30$)|
 
 ![Thrust animation.](imgs/thrust.gif) ![Thrust angle animation.](
 imgs/thrust_angle.gif)
 
-In order to design feedback flight controllers (i.e. giving thrust vectoring
+In order to design feedback controllers (i.e. giving thrust vectoring
 inputs based on the current attitude/position/velocity), the simulator provides
-functions to access the on-board sensors of Starship.
+functions to access the on-board sensors of Starship:
 
 -   To retrieve the position of Starship, you can use:
     -   <em>env.getStarshipXPosition()</em>: to get its position's x-coordinate;
@@ -109,7 +104,7 @@ The simulator also provides additional functions:
 -   <em>env.getElapsedTime()</em>: to get the elapsed time from the beginning of
 the simulation.
 -   <em>env.getDestinationX()</em> and <em>env.getDestinationY()</em> to get
-the destination point's coordinates.
+the coordinates of the landing point.
 These simply returns 0 as the landing point is considered to be the zero point
 of the coordinates system.
 
@@ -119,12 +114,12 @@ You fail the re-entry mission if:
 1.  You crash to the ground;
 2.  You hit the tower;
 3.  You land too quickly (velocity must be between -0.1 and 0.1 [pixel/seconds]
-the moment you reach the destination point).
+the moment you reach the landing point).
 
 You succeed the descent and landing if:
-1.  You land on the destination tower: you must reach any point that has as
-(x,y)-coordinate a value between [-1,1] pixels while having
-$\theta$ in [-0.5,0.5] degrees.
+1.  You reach any point that has as
+$(x,y)$-coordinate a value between $[-1,1]$ pixels while having
+$\theta$ in $[-0.5,0.5]$ degrees.
 
 ## Dynamics implementation
 
@@ -146,9 +141,8 @@ the torque equation is implemented as:
 
 Hence, it is possible to determine the accelerations by multiplying the forces
 by the inverse of the Starship's mass $m$ (that is equal to $1$) and the
-torque by the inverse of the inertia $I$ (that is equal to $10$).
+torque by the inverse of the inertia $I$ (that is equal to $1000$).
 Then, simple integration of these acceleration equations with a sampling time of
-$T_s=0.1s$ produces the motion
-dynamics of the Starship.
+$T_s=0.1s$ produces the motion dynamics of the Starship.
 
 quick explanation of simplified version's equations

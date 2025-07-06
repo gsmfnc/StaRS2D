@@ -13,7 +13,7 @@ class Starship {
     float greyVal = 119;
     float gravityVel = 1.0;
     float gravityAcc = 9.81;
-    float inertiaInv = 0.1;
+    float inertiaInv = 0.001;
     float Ts = 0.1;
 
     float vx;

@@ -161,7 +161,7 @@ class Environment {
         text("y [pix]: ", 0, 20); 
         text(String.valueOf(nf(this.getStarshipYPosition(), 0, 2)), 80, 20);
         text("θ [deg]: ", 0, 40); 
-        text(String.valueOf(nf(this.getStarshipAngle() * 180 / PI, 0, 7)),
+        text(String.valueOf(nf(this.getStarshipAngle() * 180 / PI, 0, 3)),
             80, 40);
 
         text("Vx [pix/sec]: ", 200, 0);
@@ -172,14 +172,14 @@ class Environment {
             310, 20);
         text("ω [deg/sec]: ", 200, 40);
         text(String.valueOf(nf(-this.starship.getOmega() * 180 / PI,
-            0, 7)), 310, 40);
+            0, 3)), 310, 40);
 
         text("Thrust [%]:", 400, 0);
         text(String.valueOf(nf(this.starship.getActuators().getThrust() /
             this.starship.getActuators().maxThrust, 0, 7)), 575, 0);
         text("Thrust angle [deg]:", 400, 20);
         text(String.valueOf(nf(-this.starship.getActuators().getThrustAngle() *
-            180 / PI, 0, 7)), 575, 20);
+            180 / PI, 0, 3)), 575, 20);
         text("Seconds elapsed:", 400, 40);
         if (this.starship.missionSuccess == 0)
             text(String.valueOf(this.getElapsedTime()), 575, 40);
