@@ -85,8 +85,8 @@ To give thrust vectoring inputs, the simulator provides the following functions:
 
 | Function | Description |
 | :---------------- | :-------------------- |
-| cmd.setThrustCommand(val) | Determines the thrust; 'val' must be between 0 and 1: negative values will be forced to 0, whereas positive values greater than 1 will be forced to 1. When the angle $\theta$ of Starship equals 0, a thrust command of 0.5 perfectly compensates gravity.|
-| cmd.setThrustAngleCommand(val) | Determines the angle of thrust; the thrust angle is limited to [-30,30] degrees, thus values outside this interval will be forced to either -30 (if val<-30) or 30 degrees (if val>30)|
+| cmd.setThrustCommand(val) | Determines the thrust. 'val' must be between 0 and 1: negative values will be forced to 0, whereas positive values greater than 1 will be forced to 1. When the angle $\theta$ of Starship equals 0, a thrust command of 0.5 perfectly compensates gravity.|
+| cmd.setThrustAngleCommand(val) | Determines the angle of thrust. It is limited to [-30,30] degrees, thus values outside this interval will be forced to either -30 (if val<-30) or 30 degrees (if val>30)|
 
 ![Thrust animation.](imgs/thrust.gif) ![Thrust angle animation.](
 imgs/thrust_angle.gif)
@@ -102,7 +102,7 @@ functions to access the on-board sensors of Starship:
 | env.getStarshipVx() | Returns x-coordinate of Starship's velocity |
 | env.getStarshipVy() | Returns y-coordinate of Starship's velocity |
 | env.getStarshipAngle() | Returns $\theta$ angle value |
-| env.getStarshipOmega() | Return angular velocity $\omega$ value |
+| env.getStarshipOmega() | Returns angular velocity $\omega$ value |
 
 The simulator also provides additional functions:
 -   <em>env.getElapsedTime()</em>: to get the elapsed time from the beginning of
@@ -120,10 +120,10 @@ You fail the re-entry mission if:
 3.  You land too quickly (velocity must be between -0.1 and 0.1 [pixel/seconds]
 the moment you reach the landing point).
 
-You succeed the descent and landing if:
-1.  You reach any point that has as
-$(x,y)$-coordinate a value between $[-1,1]$ pixels while having
-$\theta$ in $[-0.5,0.5]$ degrees.
+You succeed the descent and the landing if:
+1.  You reach any point in the square defined by $x$ in $[-1,1]$ and $y$ in the
+same interval while having $\theta$ in $[-0.5,0.5]$ degrees and both $Vx$ and
+$Vy$ smaller in $[-0.1,0.1]$.
 
 ## Dynamics implementation
 
