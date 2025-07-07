@@ -28,7 +28,8 @@ However, I do believe future generations should be quite aware of this
 field as it is becoming more and more important in modern
 engineering applications.
 This simulator could be a simple way to introduce young people to the
-field by providing a simplified but cool control engineering application.
+field by showing a cool (but very simplified) control engineering
+application.
 
 ## Pre-requisites
 
@@ -72,6 +73,10 @@ inputs in the "Controller design" area.
 The position and the attitude of the Starship is expressed with respect to a
 coordinate system that has its origin in the "landing point" of the ground
 tower.
+Starship position is indicated with a pair $(x,y)$ of decimal values.
+The velocity along the axes $x$ and $y$ is denoted with $Vx$ and $Vy$.
+The attitude is represented by the angle $\theta$ and the associated angular
+velocity is $\omega$.
 A graphical description of such quantities is shown in the following figure.
 
 ![Position and attitude.](imgs/position_attitude.png)
@@ -81,7 +86,7 @@ To give thrust vectoring inputs, the simulator provides the following functions:
 | Function | Description |
 | :---------------- | :-------------------- |
 | cmd.setThrustCommand(val) | Determines the thrust; 'val' must be between 0 and 1: negative values will be forced to 0, whereas positive values greater than 1 will be forced to 1. When the angle $\theta$ of Starship equals 0, a thrust command of 0.5 perfectly compensates gravity.|
-| cmd.setThrustAngleCommand(val) | Determines the angle of thrust; the thrust angle is limited to [-30,30] degrees, thus values outside this interval will be forced to either -30 (if val$<-30$) or 30 degrees (if val$>30$)|
+| cmd.setThrustAngleCommand(val) | Determines the angle of thrust; the thrust angle is limited to [-30,30] degrees, thus values outside this interval will be forced to either -30 (if val<-30) or 30 degrees (if val>30)|
 
 ![Thrust animation.](imgs/thrust.gif) ![Thrust angle animation.](
 imgs/thrust_angle.gif)
@@ -90,22 +95,21 @@ In order to design feedback controllers (i.e. giving thrust vectoring
 inputs based on the current attitude/position/velocity), the simulator provides
 functions to access the on-board sensors of Starship:
 
--   To retrieve the position of Starship, you can use:
-    -   <em>env.getStarshipXPosition()</em>: to get its position's x-coordinate;
-    -   <em>env.getStarshipYPosition()</em>: to get its position's y-coordinate;
--   The velocities of Starship can be obtained by using:
-    -   <em>env.getStarshipVx()</em>: to get its velocity's x-coordinate;
-    -   <em>env.getStarshipVy()</em>: to get its velocity's y-coordinate;
--   The attitude and the angular velocity can be measured with:
-    -   <em>env.getStarshipAngle()</em>: to get the $\theta$ angle;
-    -   <em>env.getStarshipOmega()</em>: to get the angular velocity $\omega$;
+| Function | Description |
+| :---------------- | :-------------------- |
+| env.getStarshipXPosition() | Returns x-coordinate of Starship's position|
+| env.getStarshipYPosition() | Returns y-coordinate of Starship's position |
+| env.getStarshipVx() | Returns x-coordinate of Starship's velocity |
+| env.getStarshipVy() | Returns y-coordinate of Starship's velocity |
+| env.getStarshipAngle() | Returns $\theta$ angle value |
+| env.getStarshipOmega() | Return angular velocity $\omega$ value |
 
 The simulator also provides additional functions:
 -   <em>env.getElapsedTime()</em>: to get the elapsed time from the beginning of
 the simulation.
 -   <em>env.getDestinationX()</em> and <em>env.getDestinationY()</em> to get
 the coordinates of the landing point.
-These simply returns 0 as the landing point is considered to be the zero point
+These simply returns 0 as the landing point is considered to be the "zero" point
 of the coordinates system.
 
 ## How to successfully land
@@ -139,10 +143,9 @@ the torque equation is implemented as:
 \tau=T\frac{L}{2}\sin(\theta)
 ```
 
-Hence, it is possible to determine the accelerations by multiplying the forces
-by the inverse of the Starship's mass $m$ (that is equal to $1$) and the
-torque by the inverse of the inertia $I$ (that is equal to $1000$).
+The accelerations can be computed by multiplying the forces
+by the inverse of the Starship's mass $m=1$ and the
+torque by the inverse of the inertia $I=1000$ (NOTE: the mass and the inertia
+have been chosen in order to have a decent controllability of Starship).
 Then, simple integration of these acceleration equations with a sampling time of
 $T_s=0.1s$ produces the motion dynamics of the Starship.
-
-quick explanation of simplified version's equations

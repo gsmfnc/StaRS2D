@@ -174,7 +174,7 @@ class Environment {
         text(String.valueOf(nf(-this.starship.getOmega() * 180 / PI,
             0, 3)), 310, 40);
 
-        text("Thrust [%]:", 400, 0);
+        text("Thrust [-]:", 400, 0);
         text(String.valueOf(nf(this.starship.getActuators().getThrust() /
             this.starship.getActuators().maxThrust, 0, 7)), 575, 0);
         text("Thrust angle [deg]:", 400, 20);
