@@ -72,8 +72,11 @@ As soon as you open StaRS 2D on Processing, you will get something like this:
 You should only modify the code in <em>stars2d.pde</em>.
 You can define useful
 variables at the beginning of the file and/or add thrust vectoring control
-inputs in the "Controller design" area (see the red annotations in the previous
-image).
+inputs in the "Controller design" area.
+Note that there is already an implementation of a controller that succeeds the
+landing:
+you can remove the lines of code indicated by the red annotations in the
+previous image and add yours!
 
 The position and the attitude of Starship is expressed with respect to a
 coordinate system that has its origin in the "landing point" of the launch 
