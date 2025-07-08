@@ -5,7 +5,7 @@
 **StaRS 2D** is a very simple simulator to that puts you in charge of the
 re-entry of **Starship** back to Earth.
 
-You will guide Starship safely to the ground tower
+You will guide Starship safely to the launch tower
 experimenting with **thrust vectoring** - the way rockets steer in space -
 to design your own **flight controller**.
 
@@ -26,9 +26,9 @@ I don't really expect my friends/family to learn what control engineering is by
 using this simulator.
 However, I do believe future generations should be quite aware of this
 field as it is becoming more and more important in modern
-engineering applications.
+engineering.
 This simulator could be a simple way to introduce young people to the
-field by showing a cool (but very simplified) control engineering
+field by showing a cool (but very simplified) control
 application.
 
 ## Pre-requisites
@@ -39,7 +39,7 @@ recommended that:
 torques), trigonometry (sine and cosine functions) and geometry (coordinate
 systems and scalar projection);
 1.  You have a very basic knowledge of programming (define variables, calling
-a function and know the "if" statement).
+a function and basic programming structures).
 1.  You have basics of control engineering (at least PID controllers).
 
 At the moment a course to explain basic control engineering techniques using
@@ -51,7 +51,7 @@ The course will be written in order to have less pre-requisites.
 To begin with, we need to install Processing to run StaRS 2D.
 You can follow the instructions of this [link](https://processing.org/download)
 to download the latest Processing software version.
-However, the code was tested with an older version (4.3) that can be downloaded
+However, the code was written with an older version (4.3) that can be downloaded
 [here](https://github.com/processing/processing4/releases/tag/processing-1293-4.3).
 
 To install StaRS 2D, just clone this
@@ -61,35 +61,42 @@ file wherever you cloned the repository).
 
 ## Tools to design your controller
 
-As soon as you open StaRS 2D on Processing, you will see something like this:
+As soon as you open StaRS 2D on Processing, you will get something like this:
 
-![Processing screenshot.](imgs/processing_screen.png)
+<p align="center">
+  <img src="https://github.com/gsmfnc/StaRS2D/imgs/processing_screen.png" />
+</p>
 
 You should only modify the code in <em>stars2d.pde</em>.
 You can define useful
 variables at the beginning of the file and/or add thrust vectoring control
-inputs in the "Controller design" area.
+inputs in the "Controller design" area (see the red annotations in the previous
+image).
 
-The position and the attitude of the Starship is expressed with respect to a
-coordinate system that has its origin in the "landing point" of the ground
+The position and the attitude of Starship is expressed with respect to a
+coordinate system that has its origin in the "landing point" of the launch 
 tower.
-Starship position is indicated with a pair $(x,y)$ of decimal values.
+Starship's position is indicated with a pair $(x,y)$ of decimal values.
 The velocity along the axes $x$ and $y$ is denoted with $Vx$ and $Vy$.
 The attitude is represented by the angle $\theta$ and the associated angular
 velocity is $\omega$.
 A graphical description of such quantities is shown in the following figure.
 
-![Position and attitude.](imgs/position_attitude.png)
+<p align="center">
+  <img src="https://github.com/gsmfnc/StaRS2D/imgs/position_attitude.png" />
+</p>
 
 To give thrust vectoring inputs, the simulator provides the following functions:
 
 | Function | Description |
 | :---------------- | :-------------------- |
-| cmd.setThrustCommand(val) | Determines the thrust. 'val' must be between 0 and 1: negative values will be forced to 0, whereas positive values greater than 1 will be forced to 1. When the angle $\theta$ of Starship equals 0, a thrust command of 0.5 perfectly compensates gravity.|
+| cmd.setThrustCommand(val) | Determines the thrust. 'val' must be between 0 and 1: negative values will be forced to 0, whereas values greater than 1 will be forced to 1. When the angle $\theta$ of Starship equals 0, a thrust command of 0.5 perfectly compensates gravity.|
 | cmd.setThrustAngleCommand(val) | Determines the angle of thrust. It is limited to [-30,30] degrees, thus values outside this interval will be forced to either -30 (if val<-30) or 30 degrees (if val>30)|
 
-![Thrust animation.](imgs/thrust.gif) ![Thrust angle animation.](
-imgs/thrust_angle.gif)
+<p align="center">
+  <img src="https://github.com/gsmfnc/StaRS2D/imgs/thrust.gif" />
+  <img src="https://github.com/gsmfnc/StaRS2D/imgs/thrust_angle.gif" />
+</p>
 
 In order to design feedback controllers (i.e. giving thrust vectoring
 inputs based on the current attitude/position/velocity), the simulator provides
@@ -110,7 +117,7 @@ the simulation.
 -   <em>env.getDestinationX()</em> and <em>env.getDestinationY()</em> to get
 the coordinates of the landing point.
 These simply returns 0 as the landing point is considered to be the "zero" point
-of the coordinates system.
+of the coordinate system.
 -   <em>env.getStarshipMass()</em> and <em>env.getStarshipInertia()</em> to get
 the mass and the inertia of Starship, respectively.
 
@@ -118,7 +125,7 @@ the mass and the inertia of Starship, respectively.
 
 You fail the re-entry mission if:
 1.  You crash to the ground;
-2.  You hit the tower;
+2.  You hit the launch tower;
 3.  You land too quickly (velocity must be between -0.1 and 0.1 [pixel/seconds]
 the moment you reach the landing point).
 
