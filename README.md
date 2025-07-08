@@ -132,7 +132,8 @@ You fail the re-entry mission if:
 the moment you reach the landing point).
 
 You succeed the descent and the landing if:
-1.  You reach any point in the square defined by $x$ in $[-1,1]$ and $y$ in the
+1.  You reach any point in the square defined by $x$ in $[-1,1]$ pixels and $y$
+in the
 same interval while having $\theta$ in $[-0.5,0.5]$ degrees, $\omega$ in
 $[-0.1,0.1]$ degrees/seconds and both $Vx$ and
 $Vy$ in $[-0.1,0.1]$ pixels/seconds.
@@ -156,8 +157,7 @@ the torque equation is implemented as:
 ```
 
 The accelerations can be computed by multiplying the forces
-by the inverse of the Starship's mass $m=1$ and the
-torque by the inverse of the inertia $I=1000$ (NOTE: the mass and the inertia
-have been chosen in order to have decent controllability of Starship).
+by the inverse of the Starship's mass and the
+torque by the inverse of the inertia.
 Then, simple integration of these acceleration equations with a sampling time of
 $T_s=0.1$ seconds produces the motion dynamics.
