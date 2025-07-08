@@ -64,7 +64,7 @@ file wherever you cloned the repository).
 As soon as you open StaRS 2D on Processing, you will get something like this:
 
 <p align="center">
-  <img src="https://github.com/gsmfnc/StaRS2D/imgs/processing_screen.png" />
+  <img src="https://github.com/gsmfnc/StaRS2D/blob/main/imgs/processing_screen.png" />
 </p>
 
 You should only modify the code in <em>stars2d.pde</em>.
@@ -83,7 +83,7 @@ velocity is $\omega$.
 A graphical description of such quantities is shown in the following figure.
 
 <p align="center">
-  <img src="https://github.com/gsmfnc/StaRS2D/imgs/position_attitude.png" />
+  <img src="https://github.com/gsmfnc/StaRS2D/blob/main/imgs/position_attitude.png" />
 </p>
 
 To give thrust vectoring inputs, the simulator provides the following functions:
@@ -94,8 +94,8 @@ To give thrust vectoring inputs, the simulator provides the following functions:
 | cmd.setThrustAngleCommand(val) | Determines the angle of thrust. It is limited to [-30,30] degrees, thus values outside this interval will be forced to either -30 (if val<-30) or 30 degrees (if val>30)|
 
 <p align="center">
-  <img src="https://github.com/gsmfnc/StaRS2D/imgs/thrust.gif" />
-  <img src="https://github.com/gsmfnc/StaRS2D/imgs/thrust_angle.gif" />
+  <img src="https://github.com/gsmfnc/StaRS2D/blob/main/imgs/thrust.gif" />
+  <img src="https://github.com/gsmfnc/StaRS2D/blob/main/imgs/thrust_angle.gif" />
 </p>
 
 In order to design feedback controllers (i.e. giving thrust vectoring
