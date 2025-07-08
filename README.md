@@ -39,7 +39,7 @@ recommended that:
 torques), trigonometry (sine and cosine functions) and geometry (coordinate
 systems and scalar projection);
 1.  You have a very basic knowledge of programming (define variables, calling
-a function and basic programming structures).
+a function and standard programming structures).
 1.  You have basics of control engineering (at least PID controllers).
 
 At the moment a course to explain basic control engineering techniques using
@@ -51,8 +51,10 @@ The course will be written in order to have less pre-requisites.
 To begin with, we need to install Processing to run StaRS 2D.
 You can follow the instructions of this [link](https://processing.org/download)
 to download the latest Processing software version.
-However, the code was written with an older version (4.3) that can be downloaded
-[here](https://github.com/processing/processing4/releases/tag/processing-1293-4.3).
+Note that 
+the simulator was written with an older version (4.3) that can be downloaded
+[here](https://github.com/processing/processing4/releases/tag/processing-1293-4.3)
+but it was also tested with version 4.4.4.
 
 To install StaRS 2D, just clone this
 github repository and open
@@ -111,7 +113,7 @@ functions to access the on-board sensors of Starship:
 | env.getStarshipAngle() | Returns $\theta$ angle value |
 | env.getStarshipOmega() | Returns angular velocity $\omega$ value |
 
-The simulator also provides additional functions:
+The simulator also provides these additional functions:
 -   <em>env.getElapsedTime()</em>: to get the elapsed time from the beginning of
 the simulation.
 -   <em>env.getDestinationX()</em> and <em>env.getDestinationY()</em> to get
@@ -131,8 +133,9 @@ the moment you reach the landing point).
 
 You succeed the descent and the landing if:
 1.  You reach any point in the square defined by $x$ in $[-1,1]$ and $y$ in the
-same interval while having $\theta$ in $[-0.5,0.5]$ degrees and both $Vx$ and
-$Vy$ in $[-0.1,0.1]$.
+same interval while having $\theta$ in $[-0.5,0.5]$ degrees, $\omega$ in
+$[-0.1,0.1]$ degrees/seconds and both $Vx$ and
+$Vy$ in $[-0.1,0.1]$ pixels/seconds.
 
 ## Dynamics implementation
 
@@ -157,4 +160,4 @@ by the inverse of the Starship's mass $m=1$ and the
 torque by the inverse of the inertia $I=1000$ (NOTE: the mass and the inertia
 have been chosen in order to have decent controllability of Starship).
 Then, simple integration of these acceleration equations with a sampling time of
-$T_s=0.1s$ produces the motion dynamics of the Starship.
+$T_s=0.1$ seconds produces the motion dynamics.
