@@ -176,7 +176,7 @@ class Environment {
 
         text("Thrust [-]:", 400, 0);
         text(String.valueOf(nf(this.starship.getActuators().getThrust() /
-            this.starship.getActuators().maxThrust, 0, 7)), 575, 0);
+            this.starship.getActuators().maxThrust, 0, 3)), 575, 0);
         text("Thrust angle [deg]:", 400, 20);
         text(String.valueOf(nf(-this.starship.getActuators().getThrustAngle() *
             180 / PI, 0, 3)), 575, 20);
@@ -192,11 +192,15 @@ class Environment {
     void checkMissionSuccess() {
         if (this.starship.hasCollided == 1)
             return;
+        /*
+            ADD CONDITION ON Vy > 0 (landing from "below" is not allowed)
+        */
         if (abs(this.getStarshipXPosition()) <= 1 &&
                 abs(this.getStarshipYPosition()) <= 1 &&
                 abs(this.getStarshipAngle() * 180/PI) <= 0.5) {
             if (abs(this.starship.getVy()) < 0.1 &&
-                    abs(this.starship.getVx()) < 0.1) {
+                    abs(this.starship.getVx()) < 0.1 &&
+                    abs(this.starship.getOmega()) < 0.1) {
                 if (this.starship.missionSuccess == 0)
                     this.timeToComplete = this.getElapsedTime();
                 this.starship.missionSuccess = 1;
@@ -277,6 +281,12 @@ class Environment {
     }
     float getDestinationY() {
         return 0.0;
+    }
+    float getStarshipMass() {
+        return this.starship.getMass();
+    }
+    float getStarshipInertia() {
+        return this.starship.getInertia();
     }
     float getElapsedTime() {
         return float(millis() / 100) / 10;

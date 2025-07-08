@@ -14,6 +14,7 @@ class Starship {
     float gravityVel = 1.0;
     float gravityAcc = 9.81;
     float inertiaInv = 0.001;
+    float mass = 1;
     float Ts = 0.1;
 
     float vx;
@@ -41,10 +42,10 @@ class Starship {
         }
         else if (hasCollided == 0 && missionSuccess == 0 && simplified == 0) {
             this.vx = this.vx + sin(this.getAngle().getTheta()) *
-                this.act.getThrust() * this.Ts;
+                this.act.getThrust() * this.Ts / this.mass;
             this.vy = this.vy + (this.gravityAcc -
                 cos(this.getAngle().getTheta()) * this.act.getThrust()) *
-                this.Ts;
+                this.Ts / this.mass;
             this.p.addX(this.vx * this.Ts);
             this.p.addY(this.vy * this.Ts);
         }
@@ -90,6 +91,12 @@ class Starship {
     }
     float getOmega() {
         return this.omega;
+    }
+    float getMass() {
+        return this.mass;
+    }
+    float getInertia() {
+        return 1/this.inertiaInv;
     }
 
     // Setters

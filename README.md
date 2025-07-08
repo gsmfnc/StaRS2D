@@ -111,6 +111,8 @@ the simulation.
 the coordinates of the landing point.
 These simply returns 0 as the landing point is considered to be the "zero" point
 of the coordinates system.
+-   <em>env.getStarshipMass()</em> and <em>env.getStarshipInertia()</em> to get
+the mass and the inertia of Starship, respectively.
 
 ## How to successfully land
 
@@ -123,7 +125,7 @@ the moment you reach the landing point).
 You succeed the descent and the landing if:
 1.  You reach any point in the square defined by $x$ in $[-1,1]$ and $y$ in the
 same interval while having $\theta$ in $[-0.5,0.5]$ degrees and both $Vx$ and
-$Vy$ smaller in $[-0.1,0.1]$.
+$Vy$ in $[-0.1,0.1]$.
 
 ## Dynamics implementation
 
@@ -146,6 +148,6 @@ the torque equation is implemented as:
 The accelerations can be computed by multiplying the forces
 by the inverse of the Starship's mass $m=1$ and the
 torque by the inverse of the inertia $I=1000$ (NOTE: the mass and the inertia
-have been chosen in order to have a decent controllability of Starship).
+have been chosen in order to have decent controllability of Starship).
 Then, simple integration of these acceleration equations with a sampling time of
 $T_s=0.1s$ produces the motion dynamics of the Starship.
