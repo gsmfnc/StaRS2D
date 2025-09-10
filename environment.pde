@@ -21,6 +21,23 @@ class Environment {
         Position p = new Position(1100.0, 50.0);
         Angle a = new Angle(0);
         Actuators act;
+        act = new Actuators(0.0, 0.0, 9.81);
+
+        starship = new Starship(p, a, act);
+
+        p_des = new Position(35.0, 440.0);
+
+        starshipBorderPoints = new Position[8];
+        computeBorderPoints();
+
+        timeToComplete = 0;
+    }
+    Environment(int simplified) {
+        Position p = new Position(1100.0, 50.0);
+        Angle a = new Angle(0);
+        Actuators act;
+        this.simplified = simplified;
+        
         if (this.simplified == 1)
             act = new Actuators(0.0, 0.0);
         else

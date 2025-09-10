@@ -2,7 +2,7 @@
 
 ![StaRS 2D](imgs/animation.gif)
 
-**StaRS 2D** is a very simple simulator to that puts you in charge of the
+**StaRS 2D** is a very simple simulator that puts you in charge of the
 re-entry of **Starship** back to Earth.
 
 You will guide Starship safely to the launch tower
