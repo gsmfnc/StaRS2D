@@ -133,15 +133,15 @@ the mass and the inertia of Starship, respectively.
 You fail the re-entry mission if:
 1.  You crash to the ground;
 2.  You hit the launch tower;
-3.  You land too quickly (velocity must be between -0.1 and 0.1 [pixel/seconds]
+3.  You land too quickly (velocity must be between -0.1 and 0.1 [pixel/second]
 the moment you reach the landing point).
 
 You succeed the descent and the landing if:
 1.  You reach any point in the square defined by $x$ in $[-1,1]$ pixels and $y$
 in the
 same interval while having $\theta$ in $[-0.5,0.5]$ degrees, $\omega$ in
-$[-0.1,0.1]$ degrees/seconds and both $Vx$ and
-$Vy$ in $[-0.1,0.1]$ pixels/seconds.
+$[-0.1,0.1]$ degree/second and both $Vx$ and
+$Vy$ in $[-0.1,0.1]$ pixel/second.
 
 ## Dynamics implementation
 
