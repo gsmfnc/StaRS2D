@@ -83,7 +83,7 @@ coordinate system that has its origin in the "landing point" of the launch
 tower.
 Starship's position is indicated with a pair $(x,y)$ of decimal values.
 The velocity along the axes $x$ and $y$ is denoted with $Vx$ and $Vy$.
-The attitude is represented by the angle $\theta$ and the associated angular
+The attitude is represented by the angle $\theta$ and its associated angular
 velocity is $\omega$.
 A graphical description of such quantities is shown in the following figure.
 
@@ -113,8 +113,10 @@ functions to access the on-board sensors of Starship:
 | env.getStarshipYPosition() | Returns y-coordinate of Starship's position |
 | env.getStarshipVx() | Returns x-coordinate of Starship's velocity |
 | env.getStarshipVy() | Returns y-coordinate of Starship's velocity |
-| env.getStarshipAngle() | Returns $\theta$ angle value |
-| env.getStarshipOmega() | Returns angular velocity $\omega$ value |
+| env.getStarshipAngle() | Returns $\theta$ angle value (in radians) |
+| env.getStarshipOmega() | Returns angular velocity $\omega$ value (in radians) |
+| env.getStarshipAngleInDegrees() | Returns $\theta$ angle value (in degrees) |
+| env.getStarshipOmegaInDegrees() | Returns angular velocity $\omega$ value (in degrees) |
 
 The simulator also provides these additional functions:
 -   <em>env.getElapsedTime()</em>: to get the elapsed time from the beginning of

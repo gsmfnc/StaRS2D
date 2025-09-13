@@ -293,6 +293,12 @@ class Environment {
     float getStarshipOmega() {
         return -this.starship.getOmega();
     }
+    float getStarshipAngleInDegrees() {
+        return -this.starship.getAngle().getTheta() * 180 / PI;
+    }
+    float getStarshipOmegaInDegrees() {
+        return -this.starship.getOmega() * 180 / PI;
+    }
     float getDestinationX() {
         return 0.0;
     }
